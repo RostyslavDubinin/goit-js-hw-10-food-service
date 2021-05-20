@@ -47,3 +47,4 @@ function checkTheme() {
         checkboxContainer.checked = true;
     }
 }
+
