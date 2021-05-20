@@ -10,40 +10,35 @@ function createMenuCards(menu) {
 }
 
 
-const checkboxContainer = document.querySelector('.theme-switch__toggle');
+
 const Theme = {
     LIGHT: 'light-theme',
     DARK: 'dark-theme',
 };
 const {LIGHT, DARK} = Theme;
 
-checkboxContainer.checked = false;
-checkboxContainer.addEventListener('change', ChangeTheme);
+const toggleSwitch = document.querySelector('.theme-switch__toggle');
+const currentTheme = localStorage.getItem('theme');
+const oldThemeClassContainer = document.querySelector('body');
 
-function ChangeTheme(evt) {
-    const oldThemeClassContainer = document.querySelector('body');
+if (currentTheme) {
+    oldThemeClassContainer.classList.add(currentTheme);
 
-    if (this.checked) {
+    if (currentTheme === `${DARK}`) {
+        toggleSwitch.checked = true;
+    }
+}
+
+function switchTheme(e) {
+    if (e.target.checked) {
         oldThemeClassContainer.classList.add(`${DARK}`);
         oldThemeClassContainer.classList.remove(`${LIGHT}`);
         localStorage.setItem('theme', `${DARK}`);
-    } 
-    else {
-        oldThemeClassContainer.classList.add(`${LIGHT}`);;
-        oldThemeClassContainer.classList.remove(`${DARK}`);
-        localStorage.setItem('theme', `${LIGHT}`);
-    } 
-}
-
-window.onload = checkTheme();
-
-function checkTheme() {
-    const localStorageTheme = localStorage.getItem('theme');
-
-    if (localStorageTheme !== null && localStorageTheme === 'dark-theme') {
-        document.body.className = localStorageTheme;
-
-        const themeSwitch = document.getElementById('.theme-switch__toggle');
-        checkboxContainer.checked = true;
     }
+    else {oldThemeClassContainer.classList.add(`${LIGHT}`);
+          oldThemeClassContainer.classList.remove(`${DARK}`);
+          localStorage.setItem('theme', `${LIGHT}`);
+    }    
 }
+
+toggleSwitch.addEventListener('change', switchTheme, false);
