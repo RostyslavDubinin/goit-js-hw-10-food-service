@@ -23,10 +23,11 @@ const oldThemeClassContainer = document.querySelector('body');
 
 if (currentTheme) {
     oldThemeClassContainer.classList.add(currentTheme);
-
+    
     if (currentTheme === `${DARK}`) {
         toggleSwitch.checked = true;
     }
+    
 }
 
 function switchTheme(e) {
