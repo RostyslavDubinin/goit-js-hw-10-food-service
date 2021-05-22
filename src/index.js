@@ -18,34 +18,33 @@ const Theme = {
 const {LIGHT, DARK} = Theme;
 
 const toggleSwitch = document.querySelector('.theme-switch__toggle');
-const currentTheme = localStorage.getItem('theme');
-const oldThemeClassContainer = document.querySelector('body');
+const themeClassContainer = document.body;
 
 
-
-if (currentTheme === 'dark-theme') {
-    oldThemeClassContainer.classList.add(currentTheme);
-    toggleSwitch.checked = true;
-} 
-
+themeClassContainer.classList.add(localStorage.getItem('theme') === null ? 
+Theme.LIGHT : localStorage.getItem('theme'));
+if (localStorage.getItem('theme') === Theme.DARK){
+    toggleSwitch.checked = true
+};
 
 
 
 function switchTheme(e) {
     if (e.target.checked) {
-        oldThemeClassContainer.classList.add(`${DARK}`);
-        oldThemeClassContainer.classList.remove(`${LIGHT}`);
-        localStorage.setItem('theme', `${DARK}`);
+        themeClassContainer.classList.add(Theme.DARK);
+        themeClassContainer.classList.remove(Theme.LIGHT);
+        localStorage.setItem('theme', Theme.DARK);
         
          
     }
-    else {oldThemeClassContainer.classList.add(`${LIGHT}`);
-          oldThemeClassContainer.classList.remove(`${DARK}`);
-          localStorage.setItem('theme', `${LIGHT}`);
+    else {themeClassContainer.classList.add(Theme.LIGHT);
+        themeClassContainer.classList.remove(Theme.DARK);
+          localStorage.setItem('theme', Theme.LIGHT);
         }       
 }
 
-toggleSwitch.addEventListener('change', switchTheme);
+toggleSwitch.addEventListener('change', switchTheme, false );
+
 
 
 
