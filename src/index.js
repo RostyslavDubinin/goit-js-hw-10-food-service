@@ -22,10 +22,14 @@ const currentTheme = localStorage.getItem('theme');
 const oldThemeClassContainer = document.querySelector('body');
 
 
-if ('light-theme' !== currentTheme) {
-    oldThemeClassContainer.classList.add(`${DARK}`);
+
+if (currentTheme === 'dark-theme') {
+    oldThemeClassContainer.classList.add(currentTheme);
     toggleSwitch.checked = true;
-};
+} 
+
+
+
 
 function switchTheme(e) {
     if (e.target.checked) {
@@ -45,11 +49,3 @@ toggleSwitch.addEventListener('change', switchTheme);
 
 
 
-
-
-
-
-
- 
-
- 
